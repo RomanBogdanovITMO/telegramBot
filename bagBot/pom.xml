@@ -72,7 +72,7 @@
                     <assembleDirectory>target</assembleDirectory>
                     <programs>
                         <program>
-                            <mainClass>com.home.server.TelegramBot</mainClass>
+                            <mainClass>ru.telegram.Application</mainClass>
                             <name>wTBot</name>
                         </program>
                     </programs>
