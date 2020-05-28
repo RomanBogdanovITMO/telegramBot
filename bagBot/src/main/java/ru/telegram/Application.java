@@ -1,17 +1,10 @@
 package ru.telegram;
 
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.telegram.telegrambots.ApiContextInitializer;
-import ru.telegram.config.ApplicationConfiguration;
+import org.telegram.telegrambots.TelegramBotsApi;
+import org.telegram.telegrambots.exceptions.TelegramApiRequestException;
 
-@SpringBootApplication
 public class Application {
-
-    @Autowired
-    private ApplicationConfiguration myConfig;
 
     /*public Application(ApplicationConfiguration myConfig) {
         this.myConfig = myConfig;
@@ -22,14 +15,24 @@ public class Application {
 
     }*/
 
-    static {
-        ApiContextInitializer.init();
-    }
+
 
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+
+        System.getProperties().put("proxySet", "true");
+        System.getProperties().put("socksProxyHost", "127.0.0.1");
+        System.getProperties().put("socksProxyPort", "9150");
+
+        ApiContextInitializer.init();
+        TelegramBotsApi telegramBotsApi = new TelegramBotsApi();
+        try {
+            telegramBotsApi.registerBot(new Bot());
+        } catch (TelegramApiRequestException e) {
+            e.printStackTrace();
+        }
+
+        System.out.println("Bot start");
 
     }
-
 }
