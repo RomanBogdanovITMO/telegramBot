@@ -1,1 +1,1 @@
-worker: sh target/bin/wTBot
+worker: java -jar target/bagBot-1.0-SNAPSHOT.jar
